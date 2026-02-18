@@ -150,7 +150,7 @@
 <body class="bg-royal-900 text-cream overflow-x-hidden selection:bg-gold-500 selection:text-royal-900">
 
     <!-- Audio Player -->
-    <audio id="weddingMusic" loop>
+    <audio id="weddingMusic" loop preload="auto">
         <source
             src="Kudmayi-(Film-Version)(PaglaSongs).mp3"
             type="audio/ogg">
@@ -727,19 +727,17 @@
         });
 
         // Auto play after first interaction
-document.addEventListener("click", function startMusicOnce() {
-    if (!isPlaying) {
-        audio.play().then(() => {
-            isPlaying = true;
-            musicIcon.classList.add('fa-music');
-            musicIcon.classList.remove('fa-volume-mute');
-            musicControl.classList.add('animate-pulse');
-        }).catch(err => {
-            console.log("Autoplay blocked:", err);
-        });
-    }
-    document.removeEventListener("click", startMusicOnce);
+        openBtn.addEventListener('click', () => {
+    audio.volume = 0.5;
+
+    audio.play().then(() => {
+        isPlaying = true;
+        musicControl.classList.remove('hidden');
+        musicIcon.classList.add('fa-music');
+        musicControl.classList.add('animate-pulse');
+    }).catch(e => console.log("Audio play failed", e));
 });
+
 
 
         // --- SCROLL ANIMATIONS ---
