@@ -726,6 +726,22 @@
             isPlaying = !isPlaying;
         });
 
+        // Auto play after first interaction
+document.addEventListener("click", function startMusicOnce() {
+    if (!isPlaying) {
+        audio.play().then(() => {
+            isPlaying = true;
+            musicIcon.classList.add('fa-music');
+            musicIcon.classList.remove('fa-volume-mute');
+            musicControl.classList.add('animate-pulse');
+        }).catch(err => {
+            console.log("Autoplay blocked:", err);
+        });
+    }
+    document.removeEventListener("click", startMusicOnce);
+});
+
+
         // --- SCROLL ANIMATIONS ---
 
         function runHeroAnimations() {
